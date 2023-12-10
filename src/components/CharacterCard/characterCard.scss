@@ -1,0 +1,103 @@
+// CharacterCard.scss
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .character-image {
+    img {
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+    }
+  }
+
+  .character-details {
+    padding: 20px;
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    &.alive .status-indicator {
+      background-color: #2ecc71; 
+    }
+
+    &.dead .status-indicator {
+      background-color: #e74c3c; 
+    }
+
+    &.unknown .status-indicator {
+      background-color: #95a5a6;
+    }
+
+    .status-text {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    &.alive .status-text {
+      color: #2ecc71; 
+    }
+
+    &.dead .status-text {
+      color: #e74c3c; 
+    }
+
+    &.unknown .status-text {
+      color: #95a5a6;
+    }
+
+    p {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .episode-list {
+      margin-top: 10px;
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 5px;
+        }
+
+        a {
+          text-decoration: none;
+          color: #3498db;
+          transition: color 0.3s ease-in-out;
+
+          &:hover {
+            color: #2980b9;
+          }
+        }
+      }
+    }
+  }
+}

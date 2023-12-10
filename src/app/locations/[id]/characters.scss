@@ -1,0 +1,14 @@
+.characters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0;
+
+  .character-card {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+}
