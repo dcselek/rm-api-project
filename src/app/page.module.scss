@@ -47,8 +47,8 @@
   }
 
   .locations {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
+    display: flex;
+	flex-wrap: wrap;
     gap: 16px;
     height: calc(100vh - 200px);
     overflow-y: auto;
@@ -56,7 +56,8 @@
 
   @media (max-width: 48rem) {
     .locations {
-      grid-template-columns: 1fr;
+      height: calc(100vh - 160px);
+	  justify-content: center;
     }
   }
 }
