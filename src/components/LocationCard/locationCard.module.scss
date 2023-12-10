@@ -1,0 +1,35 @@
+.location-card {
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-height: 15rem;
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .link {
+    color: #64ff00;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      color: #56d600;
+    }
+  }
+}
