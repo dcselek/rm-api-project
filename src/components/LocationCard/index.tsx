@@ -22,7 +22,7 @@ const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
 
   return (
     <div className={styles["location-card"]}>
-      <Link className={styles.link} href={`locations/${id}`}>{name}</Link>
+      <Link className={styles.link} href={`characters/${id}`}>{name}</Link>
       <p>
         <span>Type:</span> {type}
       </p>
