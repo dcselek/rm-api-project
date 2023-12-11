@@ -11,6 +11,45 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
+  &.small {
+    height: 200px;
+    flex-direction: row;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      height: auto;
+
+      img {
+        width: 100%;
+        height: 200px
+      }
+
+      .image-container {
+        .like-button {
+          top: 0px;
+          right: 0px;
+        }
+      }
+
+      .character-details {
+        padding: 10px;
+
+        h2 {
+          font-size: 12px;
+          margin-bottom: 0;
+        }
+
+        p {
+          font-size: 12px;
+        }
+
+        .status-text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
   .image-container {
     position: relative;
     overflow: hidden;

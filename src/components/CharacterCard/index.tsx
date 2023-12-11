@@ -31,11 +31,13 @@ interface CharacterType {
 interface CharacterCardProps {
   character: CharacterType;
   sort: boolean;
+  small?: boolean;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({
   character,
   sort = true,
+  small = false,
 }) => {
   const {
     status,
@@ -47,6 +49,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
     location,
     episode,
     created,
+    type,
     id,
   } = character;
   const { favorites, addFavorite, removeFavorite } = useFavorites();
@@ -63,7 +66,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   };
 
   return (
-    <div className={`character-card`}>
+    <div className={`character-card ${small ? "small" : ""}`}>
       <div className="image-container">
         <img src={image} alt={name} />
         <div
@@ -92,14 +95,19 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
         <p className="status-text">
           <strong>Status:</strong> {status}
         </p>
+
+        <p>
+          <strong>Species:</strong> {species}
+        </p>
+        <p>
+          <strong>Gender:</strong> {gender}
+        </p>
         {!sort && (
           <>
             <p>
-              <strong>Species:</strong> {species}
+              <strong>Type:</strong> {type}
             </p>
-            <p>
-              <strong>Gender:</strong> {gender}
-            </p>
+
             <p>
               <strong>Origin:</strong> {origin.name}
             </p>
