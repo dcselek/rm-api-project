@@ -6,7 +6,6 @@ const BackButton = () => {
   return (
     <button className={styles['back-button']} onClick={() => window.history.back()}>
       <IoArrowBack />
-      <span>Back</span>
     </button>
   )
 }
