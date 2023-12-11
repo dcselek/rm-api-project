@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import styles from "./page.module.scss";
 import Pagination from "@/components/Pagination";
+import Loader from "@/components/Loader";
 
 interface Location {
   id: number;
@@ -31,7 +32,7 @@ const HomePage = () => {
     <main className={styles.main}>
       <h1>Locations</h1>
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
       {isError && <p>There was an error</p>}
       {data?.info && <p>There are {data.info.count} locations in the API</p>}
       <section className={styles.locations}>

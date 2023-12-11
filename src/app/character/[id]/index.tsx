@@ -3,8 +3,8 @@ import CharacterCard from "@/components/CharacterCard";
 import axiosInstance from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 import "./character.scss";
+import Loader from "@/components/Loader";
 
 interface Props {
   params: {
@@ -59,7 +59,9 @@ const CharacterPage: React.FC<Props> = ({ params }) => {
   const getCharacters = useMutation({
     mutationFn: (residents) => axiosInstance.get(`/character/${residents}`),
     onSuccess: ({ data }) => {
-        const sameStatusDatas = data.filter((item: any) => item.status === characterData?.status);
+      const sameStatusDatas = data.filter(
+        (item: any) => item.status === characterData?.status
+      );
       setCharacters(sameStatusDatas);
     },
   });
@@ -72,34 +74,15 @@ const CharacterPage: React.FC<Props> = ({ params }) => {
       <div className="container">
         {(getCharacter.isPending ||
           getLocation.isPending ||
-          getCharacters.isPending) && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 24,
-                fontWeight: "bold",
-                color: "black",
-                marginRight: 16,
-              }}
-            >
-              Loading...
-            </span>
-          </div>
-        )}
-        {(!getCharacter.isPending &&
+          getCharacters.isPending) && <Loader />}
+        {!getCharacter.isPending &&
           !getLocation.isPending &&
-          !getCharacters.isPending) && characterData && (
-          <div className="character-container">
-            <CharacterCard character={characterData} sort={false} />
-          </div>
-        )}
+          !getCharacters.isPending &&
+          characterData && (
+            <div className="character-container">
+              <CharacterCard character={characterData} sort={false} />
+            </div>
+          )}
         <div>
           {characters?.length > 0 && (
             <>

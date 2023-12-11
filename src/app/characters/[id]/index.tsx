@@ -7,6 +7,7 @@ import "./characters.scss";
 import BackButton from "@/components/BackButton";
 import FilterButton from "@/components/FilterButton";
 import { format } from "date-fns";
+import Loader from "@/components/Loader";
 
 interface Location {
   params: {
@@ -78,6 +79,10 @@ const LocationPage: React.FC<Location> = ({ params }) => {
       }
     }
   }, [filter]);
+
+  if (getLocation.isPending || getCharacters.isPending) {
+    return <Loader />;
+  }
 
   return (
     <div>
