@@ -3,9 +3,30 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface FavoritesContextProps {
-  favorites: number[];
-  addFavorite: (id: number) => void;
+  favorites: CharacterType[] | [];
+  addFavorite: (character: CharacterType) => void;
   removeFavorite: (id: number) => void;
+}
+
+interface CharacterType {
+  id: number;
+  name: string;
+  status: "Alive" | "Dead" | "unknown";
+  species: string;
+  type: string;
+  gender: "Female" | "Male" | "Genderless" | "unknown";
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
 }
 
 interface FavoritesProviderProps {
@@ -25,10 +46,9 @@ export const useFavorites = () => {
 };
 
 export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }) => {
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<CharacterType[] | []>([]);
 
   useEffect(() => {
-    // Sayfa açıldığında localStorage'dan favorileri çek
     const storedFavorites = localStorage.getItem("favorites");
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
@@ -36,17 +56,16 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }
   }, []);
 
   useEffect(() => {
-    // Favoriler değiştiğinde localStorage'ı güncelle
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const addFavorite = (id: number) => {
-    setFavorites((prevFavorites) => [...prevFavorites, id]);
+  const addFavorite = (character: CharacterType) => {
+    setFavorites((prevFavorites) => [...prevFavorites, character]);
   };
 
   const removeFavorite = (id: number) => {
     setFavorites((prevFavorites) =>
-      prevFavorites.filter((favId) => favId !== id)
+      prevFavorites.filter((item: any) => item.id !== id)
     );
   };
 
