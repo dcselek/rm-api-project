@@ -11,6 +11,40 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
+  .image-container {
+    position: relative;
+    overflow: hidden;
+
+    .like-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 8px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      .heart-icon.liked {
+        fill: #e74c3c;
+        stroke: #e74c3c;
+      }
+
+      .heart-icon {
+        fill: #fff;
+        stroke: #fff;
+      }
+    }
+  }
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -26,26 +60,29 @@
 
   .character-details {
     padding: 20px;
+    position: relative;
 
     h2 {
       font-size: 1.5em;
       margin-bottom: 10px;
+      padding: 0;
       font-weight: bold;
     }
 
     .status-indicator {
+      position: absolute;
+      right: 10px;
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      margin-right: 8px;
     }
 
     &.alive .status-indicator {
-      background-color: #2ecc71; 
+      background-color: #2ecc71;
     }
 
     &.dead .status-indicator {
-      background-color: #e74c3c; 
+      background-color: #e74c3c;
     }
 
     &.unknown .status-indicator {
@@ -61,11 +98,11 @@
     }
 
     &.alive .status-text {
-      color: #2ecc71; 
+      color: #2ecc71;
     }
 
     &.dead .status-text {
-      color: #e74c3c; 
+      color: #e74c3c;
     }
 
     &.unknown .status-text {

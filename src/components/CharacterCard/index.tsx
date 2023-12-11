@@ -4,6 +4,8 @@ import React from "react";
 import "./characterCard.scss"; // Stil dosyanızı ekleyin
 import { format } from "date-fns";
 import Link from "next/link";
+import { FaRegHeart } from "react-icons/fa";
+import { useFavorites } from "@/lib/providers/FavoritesContext";
 
 interface CharacterType {
   id: number;
@@ -31,7 +33,10 @@ interface CharacterCardProps {
   sort: boolean;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ character, sort = true }) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({
+  character,
+  sort = true,
+}) => {
   const {
     status,
     name,
@@ -44,8 +49,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, sort = true })
     created,
     id,
   } = character;
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  // Durum göstergesi için stil sınıfı belirleme fonksiyonu
   const getStatusIndicatorClass = () => {
     switch (status) {
       case "Alive":
@@ -59,13 +64,30 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, sort = true })
 
   return (
     <div className={`character-card`}>
-      <div className="">
+      <div className="image-container">
         <img src={image} alt={name} />
+        <div
+          className="like-button"
+          onClick={() => {
+            if (favorites.some((f) => f.id === id)) {
+              removeFavorite(id);
+            } else {
+              addFavorite(character);
+            }
+          }}
+        >
+          <FaRegHeart
+            size={36}
+            className={`heart-icon ${
+              favorites.some((f) => f.id === id) ? "liked" : ""
+            }`}
+          />
+        </div>
       </div>
       <div className={`character-details ${getStatusIndicatorClass()}`}>
+        <div className="status-indicator"></div>
         <Link className="link" href={`/character/${id}`}>
           <h2>{name}</h2>
-          <div className="status-indicator"></div>
         </Link>
         <p className="status-text">
           <strong>Status:</strong> {status}
