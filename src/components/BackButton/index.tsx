@@ -4,7 +4,7 @@ import styles from "./backButton.module.scss";
 
 const BackButton = () => {
   return (
-    <button className={styles['back-button']} onClick={() => window.history.back()}>
+    <button title='go back' className={styles['back-button']} onClick={() => window.history.back()}>
       <IoArrowBack />
     </button>
   )
