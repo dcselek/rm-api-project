@@ -1,7 +1,7 @@
 // CharacterCard.tsx
 
 import React from "react";
-import "./CharacterCard.scss"; // Stil dosyanızı ekleyin
+import "./characterCard.scss"; // Stil dosyanızı ekleyin
 import { format } from "date-fns";
 import Link from "next/link";
 
