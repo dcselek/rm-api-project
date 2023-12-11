@@ -6,6 +6,7 @@ import React from "react";
 import "./characters.scss";
 import BackButton from "@/components/BackButton";
 import FilterButton from "@/components/FilterButton";
+import { format } from "date-fns";
 
 interface Location {
   params: {
@@ -80,13 +81,12 @@ const LocationPage: React.FC<Location> = ({ params }) => {
 
   return (
     <div>
-      <BackButton />
       {dataLocation && (
         <div className="data-location-card">
           <h1>{dataLocation.name}</h1>
           <p>{dataLocation.type}</p>
           <p>{dataLocation.dimension}</p>
-          <p>{dataLocation.created}</p>
+          <p>{format(new Date(dataLocation.created), "dd.MM.yyyy")}</p>
         </div>
       )}
       <div className="filter-buttons">
@@ -104,11 +104,15 @@ const LocationPage: React.FC<Location> = ({ params }) => {
           ))}
         </div>
       </div>
+      <div>
+        <p>There are {filteredCharacters.length} {filter !== "all" && filter} characters in this location</p>
+      </div>
       <div className="characters-list">
         {filteredCharacters &&
           filteredCharacters.map((item: CharacterType) => (
-            <CharacterCard character={item} key={item.id} />
+            <CharacterCard sort character={item} key={item.id} />
           ))}
+          {filteredCharacters.length === 0 && <p>There is no character</p>}
       </div>
     </div>
   );

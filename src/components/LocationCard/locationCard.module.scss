@@ -1,11 +1,12 @@
 .location-card {
   border: 0.0625rem solid #ddd;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1.25rem;
   margin: 1rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  max-height: 15rem;
+  max-height: 8rem;
+  height: 100%;
   width: 14rem;
 
   @media (max-width: 48rem) {
@@ -19,6 +20,11 @@
 
   p {
     margin: 0.5rem 0;
+    font-size: 0.875rem;
+
+    span {
+      font-weight: bold;
+    }
 
     &:last-child {
       margin-bottom: 0;
