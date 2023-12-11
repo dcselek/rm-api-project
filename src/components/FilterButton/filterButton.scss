@@ -1,0 +1,76 @@
+// filter status dead alive unknown
+
+.filter-button {
+  //active
+
+  padding: 8px 16px;
+  text-transform: capitalize;
+  background-color: #fff;
+  outline: none;
+  cursor: pointer;
+  margin: 4px 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+
+  &.all {
+    border: 1px #97ce4c solid;
+    color: #97ce4c;
+  }
+
+  &.alive {
+    border: 1px #7bb03d solid;
+    color: #7bb03d;
+  }
+
+  &.dead {
+    border: 1px #e74c3c solid;
+    color: #e74c3c;
+  }
+
+  &.unknown {
+    border: 1px #95a5a6 solid;
+    color: #95a5a6;
+  }
+
+  &:hover.alive {
+    background-color: #7bb03d;
+    color: #fff;
+  }
+
+  &:hover.dead {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+
+  &:hover.unknown {
+    background-color: #95a5a6;
+    color: #fff;
+  }
+
+  &.active.alive {
+    background-color: #7bb03d;
+    color: #fff;
+  }
+
+  &.active.dead {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+
+  &.active.unknown {
+    background-color: #95a5a6;
+    color: #fff;
+  }
+
+  &:hover.all {
+    background-color: #97ce4c;
+    color: #fff;
+  }
+
+  &.active.all {
+    background-color: #97ce4c;
+    color: #fff;
+  }
+}
