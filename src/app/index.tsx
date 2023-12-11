@@ -4,6 +4,7 @@ import axiosInstance from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import styles from "./page.module.scss";
+import Pagination from "@/components/Pagination";
 
 interface Location {
   id: number;
@@ -38,21 +39,12 @@ const HomePage = () => {
           <LocationCard location={location} key={location.id} />
         ))}
       </section>
-      <div className={styles.pagination}>
-        <button
-          onClick={() => setPage((old) => Math.max(old - 1, 1))}
-          disabled={page === 1}
-        >
-          Previous Page
-        </button>
-        <span>{page}</span>
-        <button
-          onClick={() => setPage((old) => old + 1)}
-          disabled={!data?.info.next}
-        >
-          Next Page
-        </button>
-      </div>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        prevDisabled={page === 1}
+        nextDisabled={!data?.info.next}
+      />
     </main>
   );
 };
