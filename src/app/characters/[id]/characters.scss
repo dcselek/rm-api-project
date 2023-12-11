@@ -17,33 +17,4 @@
     }
 }
 
-.characters-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 0;
-  height: calc(100vh - 200px);
-  overflow-y: auto;
 
-
-  @media (max-width: 768px) {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    margin: 0 auto;
-    justify-content: flex-start;
-  }
-
-  .character-card {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 20px;
-
-    @media (max-width: 768px) {
-      flex: 0 0 auto;
-    }
-  }
-}
