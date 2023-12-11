@@ -28,9 +28,10 @@ interface CharacterType {
 
 interface CharacterCardProps {
   character: CharacterType;
+  sort: boolean;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({ character, sort = true }) => {
   const {
     status,
     name,
@@ -69,22 +70,27 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         <p className="status-text">
           <strong>Status:</strong> {status}
         </p>
-        <p>
-          <strong>Species:</strong> {species}
-        </p>
-        <p>
-          <strong>Gender:</strong> {gender}
-        </p>
-        <p>
-          <strong>Origin:</strong> {origin.name}
-        </p>
-        <p>
-          <strong>Last Location:</strong> {location.name}
-        </p>
-        <p>
-          <strong>Created:</strong> {format(new Date(created), "dd/MM/yyyy")} -{" "}
-          {episode.length} episodes
-        </p>
+        {!sort && (
+          <>
+            <p>
+              <strong>Species:</strong> {species}
+            </p>
+            <p>
+              <strong>Gender:</strong> {gender}
+            </p>
+            <p>
+              <strong>Origin:</strong> {origin.name}
+            </p>
+            <p>
+              <strong>Last Location:</strong> {location.name}
+            </p>
+            <p>
+              <strong>Created:</strong>{" "}
+              {format(new Date(created), "dd/MM/yyyy")} - {episode.length}{" "}
+              episodes
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
