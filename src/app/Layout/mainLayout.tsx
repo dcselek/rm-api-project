@@ -21,6 +21,7 @@ const MainLayout: React.FC<IMainLayoutProps> = ({ children }) => {
     <QueryClientProvider client={queryClient}>
       <FavoritesProvider>
         <Image
+          onClick={() => (window.location.href = "/")}
           src={RickAndMortyLogo}
           alt="Rick and Morty Logo"
           className="logo"
