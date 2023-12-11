@@ -6,6 +6,8 @@ import Image from "next/image";
 import { FavoritesProvider } from "@/lib/providers/FavoritesContext";
 import { usePathname } from "next/navigation";
 import BackButton from "@/components/BackButton";
+import { FaHeart } from "react-icons/fa";
+import Link from "next/link";
 
 interface IMainLayoutProps {
   children: React.ReactNode;
@@ -23,7 +25,16 @@ const MainLayout: React.FC<IMainLayoutProps> = ({ children }) => {
           alt="Rick and Morty Logo"
           className="logo"
         />
-        {pathname !== "/" && <BackButton />}
+        <div className="buttons-container">
+          {pathname !== "/" && <BackButton />}
+          <Link href="/favorites">
+            <FaHeart
+              title="Go to Favorites"
+              size={32}
+              className="favorite-button"
+            />
+          </Link>
+        </div>
         {children}
       </FavoritesProvider>
     </QueryClientProvider>

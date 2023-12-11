@@ -4,7 +4,7 @@ import React from "react";
 import "./characterCard.scss"; // Stil dosyanızı ekleyin
 import { format } from "date-fns";
 import Link from "next/link";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { useFavorites } from "@/lib/providers/FavoritesContext";
 
 interface CharacterType {
@@ -76,7 +76,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
             }
           }}
         >
-          <FaRegHeart
+          <FaHeart
             size={36}
             className={`heart-icon ${
               favorites.some((f) => f.id === id) ? "liked" : ""
