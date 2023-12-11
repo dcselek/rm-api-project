@@ -105,14 +105,14 @@ const LocationPage: React.FC<Location> = ({ params }) => {
         </div>
       </div>
       <div>
-        <p>There are {filteredCharacters.length} {filter !== "all" && filter} characters in this location</p>
+        <p>There are {filteredCharacters?.length} {filter !== "all" && filter} characters in this location</p>
       </div>
       <div className="characters-list">
-        {filteredCharacters &&
-          filteredCharacters.map((item: CharacterType) => (
+        {filteredCharacters?.length > 0 &&
+          filteredCharacters?.map((item: CharacterType) => (
             <CharacterCard sort character={item} key={item.id} />
           ))}
-          {filteredCharacters.length === 0 && <p>There is no character</p>}
+          {filteredCharacters?.length === 0 && <p>There is no character</p>}
       </div>
     </div>
   );
