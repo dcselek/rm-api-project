@@ -5,7 +5,8 @@ import "./characterCard.scss"; // Stil dosyanızı ekleyin
 import { format } from "date-fns";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
-import { useFavorites } from "@/lib/providers/FavoritesContext";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/redux";
+import { addFavorite, removeFavorite } from "@/lib/redux/slices/FavoriteSlice";
 
 interface CharacterType {
   id: number;
@@ -52,7 +53,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
     type,
     id,
   } = character;
-  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { favCharacters } = useAppSelector(state => state.favorites)
+  const dispatch = useAppDispatch()
 
   const getStatusIndicatorClass = () => {
     switch (status) {
@@ -72,17 +74,17 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
         <div
           className="like-button"
           onClick={() => {
-            if (favorites.some((f) => f.id === id)) {
-              removeFavorite(id);
+            if (favCharacters.some((f) => f.id === id)) {
+              dispatch(removeFavorite(id))
             } else {
-              addFavorite(character);
+              dispatch(addFavorite(character));
             }
           }}
         >
           <FaHeart
             size={36}
             className={`heart-icon ${
-              favorites.some((f) => f.id === id) ? "liked" : ""
+              favCharacters.some((f) => f.id === id) ? "liked" : ""
             }`}
           />
         </div>

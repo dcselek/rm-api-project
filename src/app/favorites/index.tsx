@@ -1,16 +1,16 @@
 "use client";
 import CharacterCard from "@/components/CharacterCard";
-import { useFavorites } from "@/lib/providers/FavoritesContext";
+import { useAppSelector } from "@/lib/hooks/redux";
 import React from "react";
 
 const FavoritesPage = () => {
-  const { favorites } = useFavorites();
+  const { favCharacters } = useAppSelector((state) => state.favorites);
   return (
     <div>
       <h1>Favorites</h1>
-      {favorites.length === 0 && <p>No favorites yet</p>}
+      {favCharacters.length === 0 && <p>No favorites yet</p>}
       <div className="characters-list">
-        {favorites?.map((item) => (
+        {favCharacters?.map((item) => (
           <CharacterCard sort={false} character={item} key={item.id} />
         ))}
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { LuLoader2 } from "react-icons/lu";
 import "./loader.scss";
 
 const Loader = () => {

@@ -4,7 +4,6 @@ import axiosInstance from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import "./characters.scss";
-import BackButton from "@/components/BackButton";
 import FilterButton from "@/components/FilterButton";
 import { format } from "date-fns";
 import Loader from "@/components/Loader";
