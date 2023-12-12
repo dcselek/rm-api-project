@@ -7,6 +7,7 @@ import "./characters.scss";
 import FilterButton from "@/components/FilterButton";
 import { format } from "date-fns";
 import Loader from "@/components/Loader";
+import Pagination from "@/components/Pagination";
 
 interface Location {
   params: {
@@ -44,12 +45,16 @@ const LocationPage: React.FC<Location> = ({ params }) => {
   const [filteredCharacters, setFilteredCharacters] = React.useState<
     CharacterType[]
   >([]);
+  const [page, setPage] = React.useState<number>(1);
+  const [sumCharacters, setSumCharacters] = React.useState<number>(0);
 
   const getCharacters = useMutation({
     mutationFn: (residents) => axiosInstance.get(`/character/${residents}`),
     onSuccess: ({ data }) => {
+
       setCharacters(data);
-      setFilteredCharacters(data);
+      setSumCharacters(data.length);
+      setFilteredCharacters(data.slice(0, 18));
     },
   });
 
@@ -68,16 +73,23 @@ const LocationPage: React.FC<Location> = ({ params }) => {
     getLocation.mutate(params.id);
   }, []);
 
+  const getCharactersByFilter = (filter: string) => {
+    const start = (page - 1) * 18;
+      const end = page * 18;
+      if(filter !== "all") {
+        setSumCharacters(characters.filter((item) => item.status.toLowerCase() === filter).length);
+        const filtered = characters.filter((item) => item.status.toLowerCase() === filter);
+        setFilteredCharacters(filtered.slice(start, end));
+        return;
+      }
+      setFilteredCharacters(characters.slice(start, end));
+  }
+
   React.useEffect(() => {
     if (characters.length > 0) {
-      if (filter === "all") {
-        setFilteredCharacters(characters);
-      } else {
-        const filtered = characters.filter((item) => item.status.toLowerCase() === filter);
-        setFilteredCharacters(filtered);
-      }
+      getCharactersByFilter(filter);
     }
-  }, [filter]);
+  }, [characters, filter, page]);
 
   if (getLocation.isPending || getCharacters.isPending) {
     return <Loader />;
@@ -109,7 +121,7 @@ const LocationPage: React.FC<Location> = ({ params }) => {
         </div>
       </div>
       <div>
-        <p>There are {filteredCharacters?.length} {filter !== "all" && filter} characters in this location</p>
+        <p>There are {sumCharacters} {filter !== "all" && filter} characters in this location</p>
       </div>
       <div className="characters-list">
         {filteredCharacters?.length > 0 &&
@@ -118,6 +130,7 @@ const LocationPage: React.FC<Location> = ({ params }) => {
           ))}
           {filteredCharacters?.length === 0 && <p>There is no character</p>}
       </div>
+      <Pagination page={page} setPage={setPage} prevDisabled={page === 1} nextDisabled={sumCharacters <= page * 18} />
     </div>
   );
 };
