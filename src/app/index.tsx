@@ -6,8 +6,6 @@ import React from "react";
 import styles from "./page.module.scss";
 import Pagination from "@/components/Pagination";
 import Loader from "@/components/Loader";
-import { useAppDispatch } from "@/lib/hooks/redux";
-import { setFavorites } from "@/lib/redux/slices/FavoriteSlice";
 
 interface Location {
   id: number;
@@ -29,13 +27,7 @@ const HomePage = () => {
       return data;
     },
   });
-  const dispatch = useAppDispatch();
-  React.useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      dispatch(setFavorites(JSON.parse(storedFavorites)))
-    }
-  }, []);
+  
   return (
     <main className={styles.main}>
       <h1>Locations</h1>

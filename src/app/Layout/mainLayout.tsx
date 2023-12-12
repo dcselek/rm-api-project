@@ -8,6 +8,8 @@ import BackButton from "@/components/BackButton";
 import { FaHeart } from "react-icons/fa";
 import Link from "next/link";
 import StoreProvider from "@/app/StoreProvider";
+import { useAppDispatch } from "@/lib/hooks/redux";
+import { setFavorites } from "@/lib/redux/slices/FavoriteSlice";
 
 interface IMainLayoutProps {
   children: React.ReactNode;
@@ -17,6 +19,13 @@ const queryClient = new QueryClient();
 
 const MainLayout: React.FC<IMainLayoutProps> = ({ children }) => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
+  React.useEffect(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      dispatch(setFavorites(JSON.parse(storedFavorites)))
+    }
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <Image
