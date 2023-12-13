@@ -112,6 +112,7 @@ const LocationPage: React.FC<Location> = ({ params }) => {
               filter={filter}
               setFilter={() => {
                 setFilter(item as "unknown" | "all" | "alive" | "dead");
+                setPage(1)
               }}
               key={item}
             >
